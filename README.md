@@ -6,7 +6,7 @@ TODO(nihar): Add the URL where the site is hosted.
 
 ## Build the app
 
-First, install the [Jekyll dependencies](https://jekyllrb.com/docs/installation/). Then, install Jekyll and use it to [build the app](https://jekyllrb.com/docs/installation/). The app will be running at ```localhost:4000```. 
+First, install the [Jekyll dependencies](https://jekyllrb.com/docs/installation/). Then, install Jekyll and use it to [build the app](https://jekyllrb.com/docs/). The app will be running at ```localhost:4000```. 
 
 Note: Pass the ```--livereload``` option to serve to automatically refresh the page with each change you make to the source files: ```bundle exec jekyll serve --livereload```.
 
