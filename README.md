@@ -1,6 +1,6 @@
 # Spacetime Documentation
 
-This repo contains the web app for Spacetime documentation. This app is built using [Jekyll](https://jekyllrb.com/) and hosted by [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/). 
+This repo contains the web app for Spacetime documentation. This app is built using [Jekyll](https://jekyllrb.com/) and hosted by [Github Pages](https://docs.github.com/en/pages/quickstart). 
 
 TODO(nihar): Add the URL where the site is hosted.
 
