@@ -1,0 +1,14 @@
+// Allows us to override the default CSS values provided by the theme, at
+// https://github.com/just-the-docs/just-the-docs/blob/main/_sass/support/_variables.scss. 
+
+// Typography
+
+$body-font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+// Colors
+
+$aalyria-navy: #12264B !default;
+$aalyria-cobalt: #2D8CFB !default;
+
+$body-heading-color: $aalyria-navy;
+$link-color: $aalyria-cobalt;
