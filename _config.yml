@@ -30,7 +30,7 @@ theme: just-the-docs
 # Toggles the search bar provided by the Just the Docs theme.
 search_enabled: false
 # Causes the logo to be shown in the top left corner of all pages.
-logo: "/assets/images/spacetime-wordmark.png"
+logo: "/assets/spacetime-wordmark.png"
 # Overrides the theme defaults with the values in _sass/color_schemes/custom.scss.
 color_scheme: aalyria_styling
 
