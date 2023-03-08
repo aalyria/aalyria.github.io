@@ -2,7 +2,7 @@
 title: "Building a Scenario Tutorial"
 layout: default
 permalink: "/scenario-building"
-nav_order: 3
+nav_order: 4
 ---
 
 # Building a Scenario Tutorial
