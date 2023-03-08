@@ -52,5 +52,6 @@ exclude:
   - Gemfile.lock
    # specific to this website:
   - README.md
+  - vendor/
 
 sass_dir: _sass
