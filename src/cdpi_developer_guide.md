@@ -23,7 +23,7 @@ To create an update through a [`ControlStateChangeRequest`](https://github.com/a
 There are 4 types of updates that Spacetime issues to agents:
 - Beam updates: An update to a beam, such as an antenna or optical laser, according to the network topology that Spacetime’s solving engine has produced.
 - Radio updates: A [cognitive engine](https://www.sciencedirect.com/topics/engineering/cognitive-engine) interface for issuing updates to radio-system parameters.
-- “Flow” updates: An update to a router or switch’s configuration.
+- Flow updates: An update to a router or switch’s configuration.
 - Tunnel updates: An update to establish a tunnel with encapsulation/decapsulation rules and encryption/decryption policies.  
 
 For each of these updates, the controller sends a message corresponding to the update (e.g. [`BeamUpdate`](https://github.com/aalyria/api/blob/main/api/common/control_beam.proto)), and the agent responds with a state message (e.g [`BeamStates`](https://github.com/aalyria/api/blob/main/api/common/control_beam.proto)) to reflect the outcome of the update. 
