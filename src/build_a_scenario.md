@@ -74,9 +74,9 @@ tool that lets you interact with gRPC servers from the command-line.
 
    The `-d @` flag here tells `grpcurl` to read the JSON-formatted request body
    from standard input. Given that this is an invocation of the
-   [`minkowski.nbi.proto.NetOps.ListEntities`](https://github.com/aalyria/api/blob/main/api/nbi/nbi.proto#L127)
+   [`minkowski.nbi.proto.NetOps.ListEntities`](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/nbi.proto#L134)
    gRPC method, the request body provided to standard input is a
-   [`ListEntitiesRequest`](https://github.com/aalyria/api/blob/main/api/nbi/nbi.proto#L198)
+   [`ListEntitiesRequest`](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/nbi.proto#L186)
    message.
 
    The results returned will of course depend on the state of the Spacetime
@@ -92,7 +92,7 @@ that dictates the nature of the data it holds. For example, we queried for
 entities, `PLATFORM_DEFINITION` entities, `SERVICE_REQUEST` entities, among
 others. The complete list of types can be found in our NBI interface
 description
-[here](https://github.com/aalyria/api/blob/main/api/nbi/nbi.proto#L39).
+[here](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/nbi.proto#L40).
 
 By manipulating these entities we can do things such as configure the SDN
 Controller with the properties of the networks it is orchestrating, or request
@@ -245,7 +245,7 @@ The entity types essential for defining a network are:
   (satellites, ships, or aircraft, for instance). The entities specify attributes
   of the platforms, including their motion, and any wireless transceivers mounted on the platforms.
 
-- [`ANTENNA_PATTERN`](https://github.com/aalyria/api/blob/main/api/nbi/antenna_pattern.proto) entities,
+- [`ANTENNA_PATTERN`](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/resources/antenna_pattern.proto) entities,
   which define any three-dimensional antenna 
   [radiation patterns](https://en.wikipedia.org/wiki/Radiation_pattern) needed
   to describe the radiation or receiving properties of any antennas in the network.
@@ -253,11 +253,11 @@ The entity types essential for defining a network are:
 - [`BAND_PROFILE`](https://github.com/aalyria/api/blob/main/api/common/channel.proto) entities,
   which define the wireless frequency bands with which the network's transceivers are compatible.
 
-- [`NETWORK_NODE`](https://github.com/aalyria/api/blob/main/api/nbi/network_element.proto) entities,
+- [`NETWORK_NODE`](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/resources/network_element.proto) entities,
   which define the logical network devices in the network and their attributes, including IP
   addresses and subnets.
 
-- [`INTERFACE_LINK_REPORT`](https://github.com/aalyria/api/blob/main/api/nbi/network_link.proto)
+- [`INTERFACE_LINK_REPORT`](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/resources/network_link.proto)
   entities, which define the static links in the network. Most typically these are used to
   define a terrestrial network topology.
 
@@ -323,7 +323,7 @@ antennas in our network are identical, so a single antenna pattern is sufficient
 > ℹ️ In the interest of simplicity, we'll assume our antennas are all
 > [parabolic](https://en.wikipedia.org/wiki/Parabolic_antenna), though
 > Spacetime supports arbitrary
-> [user-defined radiation patterns](https://github.com/aalyria/api/blob/66067e6ca91180b1f7781eb13a32d23e65409473/api/nbi/antenna_pattern.proto#L19).
+> [user-defined radiation patterns](https://github.com/aalyria/api/blob/main/api/nbi/v1alpha/resources/antenna_pattern.proto).
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
