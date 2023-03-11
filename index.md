@@ -12,8 +12,6 @@ Spacetime has 2 APIs:
 - The **Northbound Interface (NBI)** allows humans or applications to define and orchestrate a network. This includes functions such as specifying the time-dynamic position and orientation of platforms and antennas, defining networking parameters on each node in the network, and creating requests for service that will be scheduled and routed through the network. 
 - The **Control to Data-plane Interface (CDPI)**, or Southbound Interface, allows Spacetime to control network devices and receive updates in return. This includes functions such as steering antenna beams to establish new links and configuring RF parameters like the transmit power and channel. 
 
-To start understanding and using the APIs, read about the object model [here](/object_model). 
-
 ## Access the APIs
 Find the Spacetime APIs in this [Github repository](https://github.com/aalyria/api).
 
