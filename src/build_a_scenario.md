@@ -356,7 +356,8 @@ asset and (2) a `NETWORK_NODE` entity defining the logical network attributes
 of the asset.
 
 To define the user terminal, we first create its `PLATFORM_DEFINITION`
-entity:
+entity. In a 5G non-terrestrial networking (NTN) architecture, this would
+correspond to user equipment.
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
@@ -508,6 +509,9 @@ The gateway is much like the user terminal except that:
 - In addition to its wireless interface, it also has a WAN-facing wired
   interface attached.
 
+In a 5G non-terrestrial networking (NTN) architecture, this would
+correspond to a gNodeB (or basestation).
+
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
       -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
@@ -633,6 +637,11 @@ satellite is unique however in that:
 
 - It has two transceivers: one for the user link and one for the gateway link.
 - It is in GEO.
+
+For the sake of this tutorial, we will assume that our satellite has a fixed
+position, but Spacetime supports defining many complex types of [motion](https://github.com/aalyria/api/blob/main/api/common/coordinates.proto).
+
+In a 5G NTN architecture, these satellites might use FR1 or FR2 bands.
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
