@@ -35,15 +35,24 @@ tool that lets you interact with gRPC servers from the command-line.
 1. To begin, install `grpcurl`. Installation instructions are available
    [here](https://github.com/fullstorydev/grpcurl#installation).
 
-2. Check out the [Authentication](/authentication.md) page for details on 
+2. Check out the [Authentication](/authentication) page for details on 
    how to obtain the two [JWT](https://www.rfc-editor.org/rfc/rfc7519) tokens needed 
    to access the APIs: a `SPACETIME_AUTH_JWT` and a `PROXY_AUTH_JWT`.
 
-3. Verify access to the Spacetime APIs. Run:
+3. Exchange the `PROXY_AUTH_JWT` for an OpenID Connect Token.
+   ```sh
+   TOKEN_PAYLOAD="$(curl -s \
+       --data-urlencode "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer" \
+       --data-urlencode "assertion=$PROXY_AUTH_JWT" \
+       https://www.googleapis.com/oauth2/v4/token)"
+   OIDC_TOKEN="$(echo "$TOKEN_PAYLOAD" | jq -r '.id_token')"
+   ```
+
+4. Verify access to the Spacetime APIs. Run:
 
    ```sh
    grpcurl -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-           -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+           -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
            nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
            list \
            minkowski.nbi.proto.NetOps
@@ -60,12 +69,12 @@ tool that lets you interact with gRPC servers from the command-line.
    minkowski.nbi.proto.NetOps.UpdateEntity
    ```
 
-4. Finally, we can actually issue a request. Let’s request a list of all of the
+5. Finally, we can actually issue a request. Let’s request a list of all of the
    network nodes present in the instance:
 
    ```sh
    grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-           -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+           -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
            nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
            minkowski.nbi.proto.NetOps.ListEntities <<EOM
    {"type": "NETWORK_NODE"}
@@ -128,7 +137,7 @@ entity.
 
    ```sh
    grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-           -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+           -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
            nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
           minkowski.nbi.proto.NetOps.CreateEntity <<EOM
    {
@@ -168,7 +177,7 @@ entity.
 
    ```sh
    grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-           -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+           -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
            nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
            minkowski.nbi.proto.NetOps.UpdateEntity <<EOM
    {
@@ -225,7 +234,7 @@ entity.
 
    ```sh
    grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-           -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+           -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
            nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
            minkowski.nbi.proto.NetOps.DeleteEntity <<EOM
    {
@@ -282,7 +291,7 @@ at a receiver.
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -327,7 +336,7 @@ antennas in our network are identical, so a single antenna pattern is sufficient
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -361,7 +370,7 @@ correspond to user equipment.
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -463,7 +472,7 @@ network representation.
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -514,7 +523,7 @@ correspond to a gNodeB (or basestation).
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -595,7 +604,7 @@ The Map tab of your scenario should now resemble:
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -645,7 +654,7 @@ In a 5G NTN architecture, these satellites might use FR1 or FR2 bands.
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -782,7 +791,7 @@ The Map tab of your scenario should now resemble:
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -834,7 +843,7 @@ We begin with the PoP's `NETWORK_NODE`:
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -863,7 +872,7 @@ And then we can add the terrestrial links. One from the PoP to the gateway:
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -902,7 +911,7 @@ and then another in the opposite direction:
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-      -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+      -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
       nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
       minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
@@ -949,7 +958,7 @@ the PoP:
 
 ```sh
 grpcurl -d @ -H "Authorization: Bearer $SPACETIME_AUTH_JWT" \
-        -H "Proxy-Authorization: Bearer $PROXY_AUTH_JWT" \
+        -H "Proxy-Authorization: Bearer $OIDC_TOKEN" \
         nbi.$INSTANCE_NAME.spacetime.aalyria.com:443 \
         minkowski.nbi.proto.NetOps.CreateEntity <<EOM
 {
