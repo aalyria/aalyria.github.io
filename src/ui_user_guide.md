@@ -88,16 +88,13 @@ A single line may encompass multiple route intents.
 - Click on the timeline to go to that point in time
 - Click on play button to toggle live data on and off
 - Users can use dropdown to select more granular time ranges 
-
+<!-- 
 ### Link Report Overlay
 Select any node and click the ‘View link report’ button on the right info panel. This overlay shows you what platforms are accessible to a selected platform by transceiver. Another way to think about it is all available links Spacetime can install. If access to a platform is not available, you will see the reason why. This is a great way to view all the platforms and links Spacetime is assessing at a given time.  
 
-![Link Report Overlay](/assets/ui_user_guide/link_report_overlay.gif)
+![Link Report Overlay](/assets/ui_user_guide/link_report_overlay.gif) -->
 
 ## Known UI Bugs
 **Timeline feels slow**: When dragging the timeline and landing on a spot, please allow 1-2 seconds for the data to properly load. There is no loading indicator.
 
 **Graph jumps around**: Best way to view and understand the network in graph view is to pause the live mode.
-
-**Requesting a custom time does not work**: Please allow up to 10 seconds when requesting a custom time range for the data to load. There is no loading indicator.
-
