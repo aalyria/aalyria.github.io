@@ -886,7 +886,7 @@ the PoP:
 
 `service_request.textproto` file:
 
-```proto
+```textproto
 id: "test-pop-to-user-terminal-service-request"
 group: {
   type: SERVICE_REQUEST
