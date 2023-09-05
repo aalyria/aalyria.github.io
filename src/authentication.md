@@ -70,6 +70,7 @@ Libraries and code samples are available for authenticating and interacting with
   * [Auth Library](https://github.com/aalyria/api/tree/main/java/com/aalyria/spacetime/authentication)
   * [Code Samples](https://github.com/aalyria/api/tree/main/java/com/aalyria/spacetime/codesamples)
 * **Go**
+  * [Auth Library](https://github.com/aalyria/api/tree/main/auth)
   * [Open-source nbictl tool](https://github.com/aalyria/api/tree/main/tools/nbictl)
   * [CDPI Agent Reference Implementation](https://github.com/aalyria/api/tree/main/cdpi_agent)
 * **Python**:
