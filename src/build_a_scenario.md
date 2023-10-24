@@ -110,7 +110,7 @@ entity.
    To create a new entity using `nbictl`, we first have to create a `.textproto` file that contains entity information you want to create. 
 
    ```textproto
-   group: {
+   group {
      type: NETWORK_NODE
    }
    network_node {
@@ -127,12 +127,12 @@ entity.
    Spacetime will respond with the created entity. It should look something like:
 
    ```textproto
-   group: {
+   group {
      type: NETWORK_NODE
    }
    id: "8fbff64e-d12a-47b2-9a85-117492ac4aad"
    commit_timestamp: 1690841566394521
-   network_node: {
+   network_node {
      name: "my-node"
    }
    ```
@@ -149,14 +149,14 @@ entity.
    ```textproto
    commit_timestamp: 1690841566394521
    id: "8fbff64e-d12a-47b2-9a85-117492ac4aad"
-   group: {
+   group {
      type: NETWORK_NODE
    }
    network_node {
      name: "my-node"
-     node_interface: {
+     node_interface {
        interface_id: "eth0"
-       wired: {}
+       wired {}
      }
    }
    ```
@@ -170,19 +170,17 @@ entity.
    Spacetime should then respond with the updated entity, something like:
 
    ```textproto
-    group: {
+    group {
       type: NETWORK_NODE
-    },
-    id: "8fbff64e-d12a-47b2-9a85-117492ac4aad",
-    commit_timestamp: 1690841671414501,
-    network_node: {
-      name: "my-node",
-      node_interface: [
-        {
+    }
+    id: "8fbff64e-d12a-47b2-9a85-117492ac4aad"
+    commit_timestamp: 1690841671414501
+    network_node {
+      name: "my-node"
+      node_interface {
           interface_id: "eth0"
-          wired: {}
-        }
-      ]
+          wired {}
+      }
     }
    ```
 
@@ -246,21 +244,21 @@ at a receiver.
 
 ```textproto
 id: "test-band-profile"
-group: {
+group {
   type: BAND_PROFILE
 }
 band_profile {
   channel_width_hz: 250000000
-  rate_table: {
-    steps: {
+  rate_table {
+    received_signal_power_steps {
       min_received_signal_power_dbw: -100
       tx_data_rate_bps: 1e8
     }
-    steps: {
+    received_signal_power_steps {
       min_received_signal_power_dbw: -90
       tx_data_rate_bps: 2e8
     }
-    steps: {
+    received_signal_power_steps {
       min_received_signal_power_dbw: -80
       tx_data_rate_bps: 3e8
     }
@@ -286,11 +284,11 @@ antennas in our network are identical, so a single antenna pattern is sufficient
 
 ```textproto
 id: "test-antenna-pattern"
-group: {
+group {
   type: ANTENNA_PATTERN
 }
 antenna_pattern {
-  parabolic_pattern: {
+  parabolic_pattern {
     diameter_m: 1
     efficiency_percent: 0.9
     backlobe_gain_db: -60
@@ -317,38 +315,38 @@ correspond to user equipment.
 
 ```textproto
 id: "test-user-terminal-platform-definition"
-group: {
+group {
   type: PLATFORM_DEFINITION
 }
 platform {
   name: "user-terminal"
   type: "UserTerminal"
-  coordinates: {
-    geodetic_wgs84: {
+  coordinates {
+    geodetic_wgs84 {
       longitude_deg: -121.7
       latitude_deg: 37.7
     }
   }
 
-  transceiver_model: {
+  transceiver_model {
     id: "transceiver-model"
 
-    transmitter: {
+    transmitter {
       name: "tx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
-          channel: {
+        value {
+          channel {
             key: 1000000000
-            value: {
+            value {
               max_power_watts: 100
             }
           }
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -357,17 +355,17 @@ platform {
       }
     }
 
-    receiver: {
+    receiver {
       name: "rx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
+        value {
           center_frequency_hz: 12000000000
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -376,10 +374,10 @@ platform {
       }
     }
 
-    antenna: {
+    antenna {
       name: "antenna"
       antenna_pattern_id: "test-antenna-pattern"
-      targeting: {}
+      targeting {}
     }
 
     macs {
@@ -417,16 +415,16 @@ network representation.
 
 ```textproto
 id: "test-user-terminal-network-node"
-group: {
+group {
   type: NETWORK_NODE
 }
 network_node {
   name: "user-terminal"
   type: "UserTerminal"
-  node_interface: {
+  node_interface {
     interface_id: "wireless"
-    wireless: {
-      transceiver_model_id: {
+    wireless {
+      transceiver_model_id {
         platform_id: "test-user-terminal-platform-definition"
         transceiver_model_id: "transceiver-model"
       }
@@ -464,38 +462,38 @@ correspond to a gNodeB (or basestation).
 
 ```textproto
 id: "test-gateway-platform-definition"
-group: {
+group {
   type: PLATFORM_DEFINITION
 }
 platform {
   name: "gateway"
   type: "Gateway"
-  coordinates: {
-    geodetic_wgs84: {
+  coordinates {
+    geodetic_wgs84 {
       longitude_deg: -121.1
       latitude_deg: 35.4
     }
   }
 
-  transceiver_model: {
+  transceiver_model {
     id: "transceiver-model"
 
-    transmitter: {
+    transmitter {
       name: "tx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
-          channel: {
+        value {
+          channel {
             key: 13000000000
-            value: {
+            value {
               max_power_watts: 100
             }
           }
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -504,17 +502,17 @@ platform {
       }
     }
 
-    receiver: {
+    receiver {
       name: "rx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
+        value {
           center_frequency_hz: 14000000000
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -523,10 +521,10 @@ platform {
       }
     }
 
-    antenna: {
+    antenna {
       name: "antenna"
       antenna_pattern_id: "test-antenna-pattern"
-      targeting: {}
+      targeting {}
     }
 
     macs {
@@ -549,24 +547,24 @@ The Map tab of your scenario should now resemble:
 
 ```textproto
 id: "test-gateway-network-node"
-group: {
+group {
   type: NETWORK_NODE
 }
 network_node {
   name: "gateway"
   type: "Gateway"
-  node_interface: {
+  node_interface {
     interface_id: "wireless"
-    wireless: {
-      transceiver_model_id: {
+    wireless {
+      transceiver_model_id {
         platform_id: "test-gateway-platform-definition"
         transceiver_model_id: "transceiver-model"
       }
     }
   }
-  node_interface: {
+  node_interface {
     interface_id: "wan"
-    wired: {}
+    wired {}
   }
 }
 ```
@@ -595,39 +593,39 @@ In a 5G NTN architecture, these satellites might use FR1 or FR2 bands.
 
 ```textproto
 id: "test-satellite-platform-definition"
-group: {
+group {
   type: PLATFORM_DEFINITION
 }
 platform {
   name: "sat"
   type: "GEO"
-  coordinates: {
-    geodetic_wgs84: {
+  coordinates {
+    geodetic_wgs84 {
       longitude_deg: -121.1
       latitude_deg: 37.4
       height_wgs84_m: 36000000
     }
   }
 
-  transceiver_model: {
+  transceiver_model {
     id: "user-link-transceiver-model"
 
-    transmitter: {
+    transmitter {
       name: "tx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
-          channel: {
+        value {
+          channel {
             key: 12000000000
-            value: {
+            value {
               max_power_watts: 100
             }
           }
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -636,17 +634,17 @@ platform {
       }
     }
 
-    receiver: {
+    receiver {
       name: "rx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
+        value {
           center_frequency_hz: 11000000000
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -655,10 +653,10 @@ platform {
       }
     }
 
-    antenna: {
+    antenna {
       name: "antenna"
       antenna_pattern_id: "test-antenna-pattern"
-      targeting: {}
+      targeting {}
     }
 
     macs {
@@ -668,25 +666,25 @@ platform {
     }
   }
 
-  transceiver_model: {
+  transceiver_model {
     id: "gateway-link-transceiver-model"
 
-    transmitter: {
+    transmitter {
       name: "tx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
-          channel: {
+        value {
+          channel {
             key: 14000000000
-            value: {
+            value {
               max_power_watts: 100
             }
           }
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -695,17 +693,17 @@ platform {
       }
     }
 
-    receiver: {
+    receiver {
       name: "rx"
-      channel_set: {
+      channel_set {
         key: "test-band-profile"
-        value: {
+        value {
           center_frequency_hz: 13000000000
         }
       }
-      signal_processing_step: {
-        amplifier: {
-          constant_gain: {
+      signal_processing_step {
+        amplifier {
+          constant_gain {
             gain_db: 10
             noise_factor: 1
             reference_temperature_k: 290
@@ -714,10 +712,10 @@ platform {
       }
     }
 
-    antenna: {
+    antenna {
       name: "antenna"
       antenna_pattern_id: "test-antenna-pattern"
-      targeting: {}
+      targeting {}
     }
 
     macs {
@@ -740,25 +738,25 @@ The Map tab of your scenario should now resemble:
 
 ```textproto
 id: "test-satellite-network-node"
-group: {
+group {
   type: NETWORK_NODE
 }
 network_node {
   name: "sat"
   type: "GEO"
-  node_interface: {
+  node_interface {
     interface_id: "user-link"
-    wireless: {
-      transceiver_model_id: {
+    wireless {
+      transceiver_model_id {
         platform_id: "test-satellite-platform-definition"
         transceiver_model_id: "user-link-transceiver-model"
       }
     }
   }
-  node_interface: {
+  node_interface {
     interface_id: "gateway-link"
-    wireless: {
-      transceiver_model_id: {
+    wireless {
+      transceiver_model_id {
         platform_id: "test-satellite-platform-definition"
         transceiver_model_id: "gateway-link-transceiver-model"
       }
@@ -791,15 +789,15 @@ We begin with the PoP's `NETWORK_NODE`:
 
 ```textproto
 id: "test-pop-network-node"
-group: {
+group {
   type: NETWORK_NODE
 }
 network_node {
   name: "pop"
   type: "POP"
-  node_interface: {
+  node_interface {
     interface_id: "wan"
-    wired: {}
+    wired {}
   }
 }
 ```
@@ -817,23 +815,21 @@ And then we can add the terrestrial links. One from the PoP to the gateway:
 
 ```textproto
 id: "test-pop-to-gateway-interface-link-report"
-group: {
+group {
   type: INTERFACE_LINK_REPORT
 }
-interface_link_report: {
-  links: {
-    access_intervals: {
-      accessibility: ACCESS_EXISTS
-      data_rate_bps: 1e+12
-    }
-    dst: {
-      node_id: "test-gateway-network-node"
-      interface_id: "wan"
-    }
-  }
-  src: {
+interface_link_report {
+  src {
     node_id: "test-pop-network-node"
     interface_id: "wan"
+  }
+  dst {
+    node_id: "test-gateway-network-node"
+    interface_id: "wan"
+  }
+  access_intervals {
+    accessibility: ACCESS_EXISTS
+    data_rate_bps: 1e+12
   }
 }
 ```
@@ -849,23 +845,21 @@ and then another in the opposite direction:
 ```textproto
 
 id: "test-gateway-to-pop-interface-link-report"
-group: {
+group {
   type: INTERFACE_LINK_REPORT
 }
-interface_link_report: {
-  links: {
-    access_intervals: {
-      accessibility: ACCESS_EXISTS
-      data_rate_bps: 1e+12
-    }
-    dst: {
-      node_id: "test-pop-network-node"
-      interface_id: "wan"
-    }
-  }
-  src: {
+interface_link_report {
+  src {
     node_id: "test-gateway-network-node"
     interface_id: "wan"
+  }
+  dst {
+    node_id: "test-pop-network-node"
+    interface_id: "wan"
+  }
+  access_intervals {
+    accessibility: ACCESS_EXISTS
+    data_rate_bps: 1e+12
   }
 }
 ```
@@ -888,13 +882,13 @@ the PoP:
 
 ```textproto
 id: "test-pop-to-user-terminal-service-request"
-group: {
+group {
   type: SERVICE_REQUEST
 }
 service_request {
   src_node_id: "test-pop-network-node"
   dst_node_id: "test-user-terminal-network-node"
-  requirements: {
+  requirements {
     bandwidth_bps_requested: 1e+06
   }
 }
