@@ -421,6 +421,7 @@ group {
 network_node {
   name: "user-terminal"
   type: "UserTerminal"
+  subnet: "107.89.175.219/32"
   node_interface {
     interface_id: "wireless"
     wireless {
@@ -430,7 +431,6 @@ network_node {
       }
     }
   }
-  subnet: "fd00:0:0:2a:0:0:0:0/64"
 }
 ```
 
@@ -553,6 +553,7 @@ group {
 network_node {
   name: "gateway"
   type: "Gateway"
+  subnet: "211.154.172.215/32"
   node_interface {
     interface_id: "wireless"
     wireless {
@@ -744,6 +745,7 @@ group {
 network_node {
   name: "sat"
   type: "GEO"
+  subnet: "191.165.104.62/32"
   node_interface {
     interface_id: "user-link"
     wireless {
@@ -795,6 +797,7 @@ group {
 network_node {
   name: "pop"
   type: "POP"
+  subnet: "121.201.204.104/32"
   node_interface {
     interface_id: "wan"
     wired {}
