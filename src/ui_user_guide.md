@@ -2,7 +2,7 @@
 title: "UI User Guide"
 layout: default
 permalink: "/ui-user-guide"
-nav_order: 6
+nav_order: 7
 ---
 
 # Spacetime UI User Guide
