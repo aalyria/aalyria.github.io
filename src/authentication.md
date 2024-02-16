@@ -45,13 +45,13 @@ While the instructions for using TPM to create a use a keypair are platform-spec
 
 ### Using command line tool `nbictl` 
 
-Once you have created private key and have shared the certificate with Aalyria, you can configure `nbictl` with the `set-context` command:
+Once you have created private key and have shared the certificate with Aalyria, you can configure `nbictl` with the `set-config` command:
 
 ```sh
-$ nbictl set-context --url "nbi.$INSTANCE_NAME.spacetime.aalyria.com:443"
-$ nbictl set-context --key_id "$KEY_ID"
-$ nbictl set-context --user_id "$USER_ID"
-$ nbictl set-context --priv_key "$PRIVATE_KEY_FILE_NAME"
+$ nbictl set-config --url "nbi.$INSTANCE_NAME.spacetime.aalyria.com:443"
+$ nbictl set-config --key_id "$KEY_ID"
+$ nbictl set-config --user_id "$USER_ID"
+$ nbictl set-config --priv_key "$PRIVATE_KEY_FILE_NAME"
 ```
 
 Once `nbictl` is configured, you can verify access to the Spacetime APIs by creating a request as follows:
