@@ -6,7 +6,7 @@ nav_order: 4
 ---
 
 # About the Federation
-Spacetime’s [Federation API](https://gitlab.corp.aalyria.com/spacetime/minkowski/-/blob/main/api/fed/v1alpha/fed.proto) addresses the growing need to allow peer networks to request and to supply network resources and interconnections between partners’ networks. This results in far greater network resilience and cost effectiveness than can be achieved by any one network alone; the increased coordination facilitates dynamic, real-time inter-network connections, which allows operators to automatically and quickly supplement gaps in network coverage or advertise unused capacity to make full use of underutilized assets.
+Spacetime’s [Federation API](https://github.com/aalyria/api/blob/main/api/fed/v1alpha/fed.proto) addresses the growing need to allow peer networks to request and to supply network resources and interconnections between partners’ networks. This results in far greater network resilience and cost effectiveness than can be achieved by any one network alone; the increased coordination facilitates dynamic, real-time inter-network connections, which allows operators to automatically and quickly supplement gaps in network coverage or advertise unused capacity to make full use of underutilized assets.
 
 Spacetime, acting as an SDN controller, exposes and utilizes the Federation API between partners’ networks, providing full federation orchestration capabilities. This is particularly powerful given Spacetime’s ability to bridge multiple domains, enabling it to orchestrate meshes across different networks in land, sea, air, and space.
 
@@ -53,4 +53,4 @@ The API itself is still in the development stage, so details may change fairly s
 * Fulfillment information to flow from requestor to provider
 * Fulfillment confirmation to flow from provider to requestor
 
-The API itself can be found [here](https://gitlab.corp.aalyria.com/spacetime/minkowski/-/blob/main/api/fed/v1alpha/fed.proto). This guide will be updated as the API evolves.
+The API itself can be found [here](https://github.com/aalyria/api/blob/main/api/fed/v1alpha/fed.proto). This guide will be updated as the API evolves.

@@ -12,7 +12,6 @@ Spacetime’s CDPI endpoint provides methods through which network devices recei
 The CDPI exposes the following services:
 - [`NetworkControllerStreaming`](https://github.com/aalyria/api/blob/main/api/cdpi/v1alpha/cdpi.proto): A bidirectional streaming interface through which the SDN controller sends commands to CDPI agents and receives control plane state information in return. 
 - [`NetworkTelemetryStreaming`](https://github.com/aalyria/api/blob/main/api/cdpi/v1alpha/cdpi.proto): A bidirectional streaming interface for network elements to report telemetry data to the controller. 
-- [`AttenuationEnvironment`](https://github.com/aalyria/api/blob/main/api/cdpi/v1alpha/cdpi.proto): A unary interface for agents to send data from sensors to the controller, which can update Spacetime’s view of the physical world. This interface is used to augment Spacetime’s weather modeling with measured weather conditions from on-device sensors.   
 - [`Cdpi`](https://github.com/aalyria/api/blob/main/api/cdpi/v1alpha/cdpi.proto): This interface is still under development. Conceptually, it is similar to [`NetworkControllerStreaming`](https://github.com/aalyria/api/blob/main/api/cdpi/v1alpha/cdpi.proto), but it will improve the semantic representation of the communication between the agent and the controller.
 
 ## NetworkControllerStreaming
@@ -125,9 +124,6 @@ This report contains maps with radio-system parameters and packet transmission d
 
 **NetworkEventReport**  
 These reports represent time-stamped events or edge events. [`NetworkEventReport`](https://github.com/aalyria/api/blob/main/api/common/telemetry.proto)s support describing whether a link is up or down through a [`RadioEvent`](https://github.com/aalyria/api/blob/main/api/common/telemetry.proto), whether a port is up or down through a [`PortEvent`](https://github.com/aalyria/api/blob/main/api/common/telemetry.proto), and whether a network interface is enabled or disabled through an [`InterfaceEvent`](https://github.com/aalyria/api/blob/main/api/common/telemetry.proto). 
-
-## AttenuationEnvironment
-Agents implement this service to send weather data from sensors to the SDN controller through [`SensorWeatherData`](https://github.com/aalyria/api/blob/main/api/cdpi/v1alpha/cdpi.proto) messages, which contain a [`WeatherDataForecast`](https://github.com/aalyria/api/blob/main/api/common/wireless_propagation.proto) and the location of the observations. This forecast stores data related to atmospheric attenuation (e.g. atmospheric pressure, temperature, water vapor pressure), rain attenuation (e.g. rain height relative to the WGS 84 ellipsoid, rain rate), and cloud and fog attenuation (e.g. cloud ceiling relative to the WGS 84 ellipsoid, cloud layer thickness, cloud liquid water density, cloud temperature). 
 
 ## Cdpi
 *This service is still under development.*
