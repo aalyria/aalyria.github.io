@@ -1,7 +1,7 @@
 ---
 title: "Southbound Interface Developer Guide"
 layout: default
-permalink: "/soutbound-interface-developer-guide"
+permalink: "/southbound-interface-developer-guide"
 nav_order: 3
 ---
 
@@ -153,7 +153,7 @@ Metrics enable Spacetime to:
 
 The telemetry service is made up of a single method: `ExportMetrics`. An agent
 may call this method to push metrics to Spacetime. Each pushed datapoint
-is accompanied by a timestmap indicating when the datapoint was observed.
+is accompanied by a timestamp indicating when the datapoint was observed.
 
 Supported metrics include:
 * Interface metrics, including operational state (up, down, etc.) and standard
